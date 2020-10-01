@@ -1,12 +1,14 @@
 <template>
-  <div class="container">
-    <Login></Login>
-  </div>
+<div>
+    <Sidebar></Sidebar>
+    <Table></Table>
+    <!-- <Profile></Profile> -->
+</div>
 </template>
 
 <script>
 export default {
-  name: "Index",
+  name: "dashboard",
   data() {
     return {
     }
@@ -14,17 +16,13 @@ export default {
 }
 </script>
 
-<style scoped>
-
-
-
-.container {
+<style>
+/* .container {
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
+} */
 </style>
