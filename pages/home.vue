@@ -1,7 +1,7 @@
 <template>
 <div>
-    <Sidebar></Sidebar>
-    <Table></Table>
+    <sidebar/>
+    <admin/>
     <!-- <Profile></Profile> -->
 </div>
 </template>

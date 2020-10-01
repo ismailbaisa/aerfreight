@@ -669,6 +669,11 @@ module.exports = {
         },
       },
     },
+    extend: {
+      backgroundImage: theme => ({
+        'trash-icon': "url('/assets/images/trash.svg')",
+                })
+    }
   },
   variants: {
     accessibility: ['responsive', 'focus'],
