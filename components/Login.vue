@@ -9,7 +9,7 @@
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          autocomplete="off" id="username" v-model="username" type="text" placeholder="Username">
+          autocomplete="off" id="username" v-model="username" type="text" placeholder="Username" required>
       </div>
       <div class="mb-6">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -17,7 +17,8 @@
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          autocomplete="off" id="password" v-model="password" type="password" placeholder="Password">
+          autocomplete="off" id="password" v-model="password" type="password" placeholder="Password" required>
+        <p class="text-red-500 text-xs italic" v-if="empty">Please input username and password.</p>
         <p class="text-red-500 text-xs italic" v-if="error">Invalid username or password.</p>
       </div>
       <div class="flex items-center justify-between">
@@ -47,7 +48,10 @@
     methods: {
       login() {
         this.error = false;
-        if (this.username == "admin" && this.password == 123) {
+        this.empty = false;
+        if (!this.username || !this.password) {
+          this.empty = true;
+        } else if (this.username == "admin" && this.password == 123) {
           this.$router.replace('/home')
         } else {
           this.error = true

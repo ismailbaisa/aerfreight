@@ -1,39 +1,86 @@
 <template>
-  <main class="ml-80 p-1">
-    <h1 class="text-4xl font-bold mt-4 mb-10 text-aerfreight"> Main Dashboard </h1>
+  <main class="ml-96 p-4">
+    <h1 class="text-4xl font-bold mt-2 mb-6 -ml-10 text-aerfreight"> Admin Dashboard </h1>
+    <div class="grid grid-cols-3 gap-10 w-11/12">
+      <span class="bg-white rounded-lg shadow-lg p-5 mr-4 mb-6 w-full">
+        <plane-icon class="h-20 text-purple-700"/>
+        <br>
+        <p class="text-2xl font-extrabold">50</p>
+        <br>
+        <h1 class="font-bold text-xl">Available Planes</h1>
+      </span>
+        <span class="bg-white rounded-lg shadow-lg p-5 mr-4 mb-6 w-full">
+          <box-icon class="h-20 text-orange-700"/>
+        <br>
+        <p class="text-2xl font-extrabold">425</p>
+        <br>
+        <h1 class="font-bold text-xl">Available Cargos</h1>
+      </span>
+        <span class="bg-white rounded-lg shadow-lg p-5 mb-6 w-full">
+          <parachute-icon class="h-20 text-yellow-500"/>
+        <br>
+        <p class="text-2xl font-extrabold">40</p>
+        <br>
+        <h1 class="font-bold text-xl">On Delivery</h1>
+      </span>
+      
+      
+    </div>
     <div class="rounded-lg bg-white shadow-lg w-11/12 p-10">
-      <table class="table-fixed bg-white w-full text-center">
+    <input placeholder="Search Cargo Here" class="w-1/4 mb-3 mr-4 p-3 bg-gray-200 rounded-lg"><button class="p-2 bg-aerfreight text-white font-extrabold border border-black rounded">Search</button>
+      <table class="table-fixed w-full">
         <thead>
-          <tr class="bg-aerfreight text-white shadow-lg">
-            <th class="border p-2">Cargo Number</th>
-            <th class="border p-2">Capacity</th>
-            <th class="border p-2">Flight Schedule</th>
-            <th class="border p-2">Country Origin</th>
-            <th class="border p-2">Country Destination</th>
-            <th class="border p-2">Flight Detail</th>
-            <th class="border p-2">Status</th>
-            <th class="border p-2">Tools</th>
+          <tr class="bg-aerfreight text-white shadow-xl">
+            <th class="border border-b-4 p-3 border-black">Cargo Number</th>
+            <th class="border border-b-4 p-3 border-black ">Capacity</th>
+            <th class="border border-b-4 p-3 border-black ">Flight Schedule</th>
+            <th class="border border-b-4 p-3 border-black ">Country Origin</th>
+            <th class="border border-b-4 p-3 border-black ">Country Destination</th>
+            <th class="border border-b-4 p-3 border-black ">Flight Detail</th>
+            <th class="border border-b-4 p-3 border-black ">Status</th>
+            <th class="border border-b-4 p-3 border-black ">Tools</th>
           </tr>
         </thead>
         <tbody v-for="(data, index) in datas" v-bind:key="data.id">
-          <tr class="font-bold">
+          <tr class="font-bold ">
             <td class="p-2">
-              <input :disabled="datas[index].editable" v-model="datas[index].number" class="w-full text-center">
+              <input v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].number" class="w-full rounded text-center h-16">
             </td>
             <td class="p-2">
-              <input :disabled="datas[index].editable" v-model="datas[index].capacity" class="w-full text-center">
+              <input v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].capacity"
+                class="w-full rounded text-center h-16">
             </td>
             <td class="p-2">
-              <input :disabled="datas[index].editable" v-model="datas[index].schedule" class="w-full text-center">
+              <input type="time" v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].schedule.time"
+                class="w-full rounded text-center h-7 mb-3">
+              <input type="date" v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].schedule.date"
+                class="w-full rounded text-center h-7">
             </td>
             <td class="p-2">
-              <input :disabled="datas[index].editable" v-model="datas[index].origin" class="w-full text-center">
+              <select v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].origin"
+                class="w-full rounded h-16 text-center capitalize">
+                <option v-for="(country, index) in countries" :value="country"  v-bind:key="index">{{country}}</option>
+              </select>
             </td>
             <td class="p-2">
-              <input :disabled="datas[index].editable" v-model="datas[index].destination" class="w-full text-center">
+              <select v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].destination"
+                class="w-full rounded h-16 justify-start capitalize">
+                <option v-for="(country, index) in countries" :value="country" v-bind:key="index">{{country}}</option>
+              </select>
             </td>
             <td class="p-2">
-              <input :disabled="datas[index].editable" v-model="datas[index].detail" class="w-full text-center">
+              <input v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].detail.name"
+                class="w-full rounded break-words text-center h-7 mb-3">
+              <input title="table" v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
+                :disabled="datas[index].editable" v-model="datas[index].detail.number"
+                class="w-full rounded break-words text-center h-7">
             </td>
             <td class="p-2 capitalize"
               @click="data.status == 'active' ? data.status = 'inactive' : data.status = 'active'">
@@ -42,14 +89,16 @@
                 class="text-white font-bold capitalize p-2 w-full rounded-lg shadow-lg gray-500" type="button">
                 {{data.status}}
               </button>
-
             </td>
-            <td class="p-2 text-center items-center h-full m-0" @click="data.editable = false">
+            <td class="p-2 text-center items-center h-full m-0">
               <div class="grid grid-cols-2">
-                <edit-icon class="h-6 cursor-pointer text-blue-600"/>
-                <trash-icon class="h-6 clear-pointer  text-orange-600"/>
+                <span @click="data.editable = false">
+                  <edit-icon class="h-6 cursor-pointer text-blue-600" />
+                </span>
+                <span @click="datas.splice(index, 1)">
+                  <trash-icon class="h-6 cursor-pointer  text-red-600" />
+                </span>
               </div>
-
             </td>
           </tr>
         </tbody>
@@ -66,114 +115,120 @@
     name: 'Table',
     data() {
       return {
+        countries: ['japan', 'usa', 'indonesia'],
+        detail: [{
+            name: 'Air Asia',
+            number: 'XD533',
+          },
+          {
+            name: 'Garuda',
+            number: 'YE666',
+          },
+          {
+            name: 'Fly Emirates',
+            number: 'JEY4P',
+          }
+        ],
         submit: true,
         datas: [{
             id: 1,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
+            number: 'ACO53',
+            capacity: '200 kg',
+            schedule: {
+              date: null,
+              time: null,
+            },
+            origin: 'japan',
+            destination: 'usa',
+            detail: {
+              name: 'Garuda',
+              number: 'HEL50'
+            },
             status: 'active',
             editable: true,
           },
           {
             id: 2,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
+            number: 'YELO05',
+            capacity: '200 kg',
+            schedule: {
+              date: null,
+              time: null,
+            },
+            origin: 'japan',
+            destination: 'usa',
+            detail: {
+              name: 'Garuda',
+              number: 'HEL50'
+            },
             status: 'active',
             editable: true,
           },
           {
             id: 3,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
+            number: 'EIJU0U',
+            capacity: '200 kg',
+            schedule: {
+              date: null,
+              time: null,
+            },
+            origin: 'japan',
+            destination: 'usa',
+            detail: {
+              name: 'Garuda',
+              number: 'HEL50'
+            },
             status: 'active',
             editable: true,
           },
           {
             id: 4,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
+            number: 'AIUEUY',
+            capacity: '200 kg',
+            schedule: {
+              date: null,
+              time: null,
+            },
+            origin: 'japan',
+            destination: 'usa',
+            detail: {
+              name: 'Garuda',
+              number: 'HEL50'
+            },
             status: 'active',
             editable: true,
           },
           {
             id: 5,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
+            number: 'QWEUIASD',
+            capacity: '200 kg',
+            schedule: {
+              date: null,
+              time: null,
+            },
+            origin: 'japan',
+            destination: 'usa',
+            detail: {
+              name: 'Garuda',
+              number: 'HEL50'
+            },
             status: 'active',
             editable: true,
           },
           {
             id: 6,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 7,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 8,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 9,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 10,
-            number: 1,
-            capacity: 1,
-            schedule: 'tonight',
-            origin: 'jakarta',
-            destination: 'bandung',
-            detail: 'somewhere',
+            number: 'ZKXJ5',
+            capacity: '200 kg',
+            schedule: {
+              date: null,
+              time: null,
+            },
+            origin: 'japan',
+            destination: 'usa',
+            detail: {
+              name: 'Garuda',
+              number: 'HEL50'
+            },
             status: 'active',
             editable: true,
           },

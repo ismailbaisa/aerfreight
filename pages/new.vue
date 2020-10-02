@@ -1,14 +1,13 @@
 <template>
-<div class="h-screen w-screen bg-aerfreight">
-  <div class="container">
-    <login/>
-  </div>
+<div>
+    <sidebar/>
+    HELLO
 </div>
 </template>
 
 <script>
 export default {
-  name: "Index",
+  name: "new",
   data() {
     return {
     }
@@ -16,15 +15,13 @@ export default {
 }
 </script>
 
-<style scoped>
-
-.container {
+<style>
+/* .container {
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
+} */
 </style>
