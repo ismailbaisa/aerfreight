@@ -2,6 +2,12 @@
 
 ## Build Setup
 
+credential :
+username: admin
+password: 123
+
+or just login as guest
+
 ```bash
 # install dependencies
 $ npm install
