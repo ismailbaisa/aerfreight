@@ -37,6 +37,7 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions, mapMutations } from "vuex";
   export default {
     data() {
       return {
@@ -54,12 +55,14 @@
           this.empty = true;
         } else if (this.username == "admin" && this.password == 123) {
           this.$router.replace('/home')
+          this.$store.commit('checkUser', 'admin');
         } else {
           this.error = true
         }
       },
       guest(){
          this.$router.replace('/guest')
+         this.$store.commit('checkUser', 'guest');
       }
 
 

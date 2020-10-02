@@ -8,11 +8,12 @@
           type="button" @click="goHome">
           <home-icon class="h-10" /> Overview
         </button>
-        <button
+        <button v-if="user == 'admin'"
           class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded h-32 w-11/12 m-auto"
           type="button" @click="newCargo">
           <box-icon class="h-10" />New Cargo
         </button>
+        <span v-if="user == 'guest'"></span>
         <span></span>
         <span></span>
         <button
@@ -41,6 +42,11 @@ import { mapGetters, mapActions } from "vuex";
         this.$router.replace('/')
       }
     },
+     computed: mapGetters({
+      user: "dataUser"
+    }),
+    // mounted:
+    // console.log(this.user)
   }
 </script>
 

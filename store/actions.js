@@ -59,9 +59,26 @@ export default {
     },
     async editCargo({commit, dispatch}, payload) {
         try {
-            let { data } = await this.$axios.put('https://aerfreight-crud.firebaseio.com/posts.json/'+ payload, {
-                'editable' : 'false'
+            let { data } = await this.$axios.put('https://aerfreight-crud.firebaseio.com/posts.json/'+ payload.id, {
+                editable: payloads.editable,
             },
+            {headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': '*'} }
+            )
+        }
+        catch (err) {
+        Swal.fire(
+                'Error!',
+                err,
+                'error'
+              )
+        }
+    },
+    async actCargo({commit, dispatch}, payload) {
+        try {
+            let { data } = await this.$axios.put('https://aerfreight-crud.firebaseio.com/posts.json/'+ payload.id, 
+            {
+            status: payloads.status,
+        },
             {headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': '*'} }
             )
         }

@@ -81,8 +81,7 @@
                 :disabled="datas[index].editable" v-model="datas[index].detail.flight"
                 class="w-full rounded break-words text-center h-7">
             </td>
-            <td class="p-2 capitalize"
-              @click="data.status == 'active' ? data.status = 'inactive' : data.status = 'active'">
+            <td class="p-2 capitalize" @click="actOn(data)">
               <button
                 v-bind:class="data.status == 'active' ? 'bg-green-400 hover:bg-green-400' : 'bg-red-600 hover:bg-red-400'"
                 class="text-white font-bold capitalize p-2 w-full rounded-lg shadow-lg gray-500" type="button">
@@ -91,7 +90,7 @@
             </td>
             <td class="p-2 text-center items-center h-full m-0">
               <div class="grid grid-cols-2">
-                <span @click="editCargo(data.id)">
+                <span @click="editCargo(data)">
                   <edit-icon class="h-6 cursor-pointer text-blue-600" />
                 </span>
                 <span @click="delCargo(data.id)">
@@ -106,30 +105,55 @@
   </main>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+  import {
+    mapGetters,
+    mapActions
+  } from "vuex";
   export default {
     data() {
       return {
         submit: true,
-         countries: ['USA', 'Singapore', 'Indonesia', 'Japan', 'China'],
+        countries: ['USA', 'Singapore', 'Indonesia', 'Japan', 'China'],
       }
     },
-     computed: mapGetters({
+    computed: mapGetters({
       datas: "dataCargo"
     }),
-    methods:{
-      delCargo(id){
+    methods: {
+      delCargo(id) {
         this.$store.dispatch('deleteCargo', id);
       },
-      editCargo(id){
-        this.$store.dispatch('editCargo', id);
+      editCargo(data) {
+        if (data.editCargo == true) {
+          this.$store.dispatch('editCargo', {
+            id: data.id,
+            editable: false
+          });
+        } else {
+          this.$store.dispatch('editCargo', {
+            id: data.id,
+            editable: false
+          });
+        }
+      },
+       actOn(data) {
+      if (data.status == 'active') {
+        this.$store.dispatch('actCargo', {
+          id: data.id,
+          status: 'inactive'
+        });
+      } else {
+        this.$store.dispatch('actCargo', {
+          id: data.id,
+          status: 'active'
+        });
       }
     },
-
-    async mounted(){
+    },
+   
+    async mounted() {
       await this.$store.dispatch('getCargo');
-       console.log(this.datas)
-       
+
     }
   }
 </script>
