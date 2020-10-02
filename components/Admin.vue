@@ -91,10 +91,10 @@
             </td>
             <td class="p-2 text-center items-center h-full m-0">
               <div class="grid grid-cols-2">
-                <span @click="data.editable = false">
+                <span @click="editCargo(data.id)">
                   <edit-icon class="h-6 cursor-pointer text-blue-600" />
                 </span>
-                <span @click="datas.splice(index, 1)">
+                <span @click="delCargo(data.id)">
                   <trash-icon class="h-6 cursor-pointer  text-red-600" />
                 </span>
               </div>
@@ -117,9 +117,19 @@ import { mapGetters, mapActions } from "vuex";
      computed: mapGetters({
       datas: "dataCargo"
     }),
+    methods:{
+      delCargo(id){
+        this.$store.dispatch('deleteCargo', id);
+      },
+      editCargo(id){
+        this.$store.dispatch('editCargo', id);
+      }
+    },
 
-    mounted(){
-       this.$store.dispatch('getCargo');
+    async mounted(){
+      await this.$store.dispatch('getCargo');
+       console.log(this.datas)
+       
     }
   }
 </script>

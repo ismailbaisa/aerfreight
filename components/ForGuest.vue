@@ -75,9 +75,9 @@
             </td>
             <td class="p-2">
               <input disabled
-                v-model="datas[index].detail.name"
+                v-model="datas[index].detail.airline"
                 class="w-full rounded break-words text-center bg-gray-200 h-7 mb-3">
-              <input disabled title="table" v-model="datas[index].detail.number"
+              <input disabled title="table" v-model="datas[index].detail.flight"
                 class="w-full rounded break-words text-center bg-gray-200 h-7">
             </td>
             <td class="p-2 capitalize">
@@ -99,129 +99,22 @@
 </style>
 
 <script>
+ import { mapGetters, mapActions } from "vuex";
   export default {
-    name: 'Table',
     data() {
       return {
-        countries: ['japan', 'usa', 'indonesia'],
-        detail: [{
-            name: 'Air Asia',
-            number: 'XD533',
-          },
-          {
-            name: 'Garuda',
-            number: 'YE666',
-          },
-          {
-            name: 'Fly Emirates',
-            number: 'JEY4P',
-          }
-        ],
         submit: true,
-        datas: [{
-            id: 1,
-            number: 'ACO53',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 2,
-            number: 'YELO05',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 3,
-            number: 'EIJU0U',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 4,
-            number: 'AIUEUY',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 5,
-            number: 'QWEUIASD',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 6,
-            number: 'ZKXJ5',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-        ]
+         countries: ['USA', 'Singapore', 'Indonesia', 'Japan', 'China'],
       }
     },
+     computed: mapGetters({
+      datas: "dataCargo"
+    }),
+
+    async mounted(){
+      await this.$store.dispatch('getCargo');
+       console.log(this.datas)
+       
+    }
   }
 </script>

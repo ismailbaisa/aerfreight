@@ -37,4 +37,40 @@ export default {
               )
         }
     },
+    async deleteCargo({commit, dispatch}, payload) {
+        try {
+            let { data } = await this.$axios.delete('https://aerfreight-crud.firebaseio.com/posts.json/'+ payload, {
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': '*'}
+            })
+
+            Swal.fire(
+                'Cargo Deleted!',
+                '',
+                'success'
+              )
+        }
+        catch (err) {
+        Swal.fire(
+                'Error!',
+                err,
+                'error'
+              )
+        }
+    },
+    async editCargo({commit, dispatch}, payload) {
+        try {
+            let { data } = await this.$axios.put('https://aerfreight-crud.firebaseio.com/posts.json/'+ payload, {
+                'editable' : 'false'
+            },
+            {headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': '*'} }
+            )
+        }
+        catch (err) {
+        Swal.fire(
+                'Error!',
+                err,
+                'error'
+              )
+        }
+    },
 } 
