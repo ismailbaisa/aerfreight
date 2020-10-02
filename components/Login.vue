@@ -29,7 +29,7 @@
         </button>
         <button
           class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
-          type="button">
+          type="button" @click="guest">
           Guest
         </button>
       </div>
@@ -43,6 +43,7 @@
         username: "",
         password: "",
         error: "",
+        empty: "",
       }
     },
     methods: {
@@ -56,6 +57,9 @@
         } else {
           this.error = true
         }
+      },
+      guest(){
+         this.$router.replace('/guest')
       }
 
 

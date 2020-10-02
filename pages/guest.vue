@@ -1,13 +1,14 @@
 <template>
 <div>
     <sidebar/>
-    <new-cargo/>
+    <for-guest/>
+    <!-- <Profile></Profile> -->
 </div>
 </template>
 
 <script>
 export default {
-  name: "new",
+  name: "dashboard",
   data() {
     return {
     }

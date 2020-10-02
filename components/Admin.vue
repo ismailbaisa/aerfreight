@@ -1,33 +1,32 @@
 <template>
   <main class="ml-96 p-4">
     <h1 class="text-4xl font-bold mt-2 mb-6 -ml-10 text-aerfreight"> Admin Dashboard </h1>
-    <div class="grid grid-cols-3 gap-10 w-11/12">
+    <div class="grid grid-cols-3 gap-10 w-19/20">
       <span class="bg-white rounded-lg shadow-lg p-5 mr-4 mb-6 w-full">
-        <plane-icon class="h-20 text-purple-700"/>
+        <plane-icon class="h-20 text-purple-700" />
         <br>
         <p class="text-2xl font-extrabold">50</p>
         <br>
         <h1 class="font-bold text-xl">Available Planes</h1>
       </span>
-        <span class="bg-white rounded-lg shadow-lg p-5 mr-4 mb-6 w-full">
-          <box-icon class="h-20 text-orange-700"/>
+      <span class="bg-white rounded-lg shadow-lg p-5 mr-4 mb-6 w-full">
+        <box-icon class="h-20 text-purple-500" />
         <br>
         <p class="text-2xl font-extrabold">425</p>
         <br>
         <h1 class="font-bold text-xl">Available Cargos</h1>
       </span>
-        <span class="bg-white rounded-lg shadow-lg p-5 mb-6 w-full">
-          <parachute-icon class="h-20 text-yellow-500"/>
+      <span class="bg-white rounded-lg shadow-lg p-5 mb-6 w-full">
+        <parachute-icon class="h-20 text-indigo-500" />
         <br>
         <p class="text-2xl font-extrabold">40</p>
         <br>
         <h1 class="font-bold text-xl">On Delivery</h1>
       </span>
-      
-      
     </div>
-    <div class="rounded-lg bg-white shadow-lg w-11/12 p-10">
-    <input placeholder="Search Cargo Here" class="w-1/4 mb-3 mr-4 p-3 bg-gray-200 rounded-lg"><button class="p-2 bg-aerfreight text-white font-extrabold border border-black rounded">Search</button>
+    <div class="rounded-lg bg-white shadow-lg w-19/20 p-10">
+      <input placeholder="Search Cargo Here" class="w-1/4 mb-3 mr-4 p-3 bg-gray-200 rounded-lg"><button
+        class="p-2 bg-aerfreight text-white font-extrabold border border-black rounded">Search</button>
       <table class="table-fixed w-full">
         <thead>
           <tr class="bg-aerfreight text-white shadow-xl">
@@ -64,22 +63,22 @@
               <select v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
                 :disabled="datas[index].editable" v-model="datas[index].origin"
                 class="w-full rounded h-16 text-center capitalize">
-                <option v-for="(country, index) in countries" :value="country"  v-bind:key="index">{{country}}</option>
+                <option v-for="(country, index) in countries" :value="country" v-bind:key="index">{{country}}</option>
               </select>
             </td>
             <td class="p-2">
               <select v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
                 :disabled="datas[index].editable" v-model="datas[index].destination"
-                class="w-full rounded h-16 justify-start capitalize">
+                class="w-full rounded h-16 text-center capitalize">
                 <option v-for="(country, index) in countries" :value="country" v-bind:key="index">{{country}}</option>
               </select>
             </td>
             <td class="p-2">
               <input v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
-                :disabled="datas[index].editable" v-model="datas[index].detail.name"
+                :disabled="datas[index].editable" v-model="datas[index].detail.airline"
                 class="w-full rounded break-words text-center h-7 mb-3">
               <input title="table" v-bind:class="datas[index].editable == false ? 'bg-blue-300' : 'bg-gray-200'"
-                :disabled="datas[index].editable" v-model="datas[index].detail.number"
+                :disabled="datas[index].editable" v-model="datas[index].detail.flight"
                 class="w-full rounded break-words text-center h-7">
             </td>
             <td class="p-2 capitalize"
@@ -106,134 +105,21 @@
     </div>
   </main>
 </template>
-
-<style>
-</style>
-
 <script>
+import { mapGetters, mapActions } from "vuex";
   export default {
-    name: 'Table',
     data() {
       return {
-        countries: ['japan', 'usa', 'indonesia'],
-        detail: [{
-            name: 'Air Asia',
-            number: 'XD533',
-          },
-          {
-            name: 'Garuda',
-            number: 'YE666',
-          },
-          {
-            name: 'Fly Emirates',
-            number: 'JEY4P',
-          }
-        ],
         submit: true,
-        datas: [{
-            id: 1,
-            number: 'ACO53',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 2,
-            number: 'YELO05',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 3,
-            number: 'EIJU0U',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 4,
-            number: 'AIUEUY',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 5,
-            number: 'QWEUIASD',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-          {
-            id: 6,
-            number: 'ZKXJ5',
-            capacity: '200 kg',
-            schedule: {
-              date: null,
-              time: null,
-            },
-            origin: 'japan',
-            destination: 'usa',
-            detail: {
-              name: 'Garuda',
-              number: 'HEL50'
-            },
-            status: 'active',
-            editable: true,
-          },
-        ]
+         countries: ['USA', 'Singapore', 'Indonesia', 'Japan', 'China'],
       }
     },
+     computed: mapGetters({
+      datas: "dataCargo"
+    }),
+
+    mounted(){
+       this.$store.dispatch('getCargo');
+    }
   }
 </script>
